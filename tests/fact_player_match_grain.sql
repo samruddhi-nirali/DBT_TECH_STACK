@@ -1,0 +1,11 @@
+SELECT
+    PLAYER_KEY,
+    MATCH_KEY,
+    INNINGS_NUMBER,
+    COUNT(*) AS RECORD_COUNT
+FROM {{ ref('fact_player_match') }}
+GROUP BY
+    PLAYER_KEY,
+    MATCH_KEY,
+    INNINGS_NUMBER
+HAVING COUNT(*) > 1

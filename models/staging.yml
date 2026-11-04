@@ -1,0 +1,26 @@
+version: 2
+
+models:
+  - name: stg_matches
+    description: "One row per cricket match."
+    columns:
+      - name: MATCH_ID
+        description: "Unique identifier derived from the source filename."
+        data_tests:
+          - not_null
+          - unique
+  - name: stg_deliveries
+    description: "One row per delivery in a cricket match."
+    columns:
+      - name: MATCH_ID
+        data_tests:
+          - not_null
+      - name: TOTAL_RUNS
+        data_tests:
+          - not_null
+      - name: INNINGS_NUMBER
+        data_tests:
+          - not_null
+          
+          
+          

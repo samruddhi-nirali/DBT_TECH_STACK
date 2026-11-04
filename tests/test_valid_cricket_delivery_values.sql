@@ -1,0 +1,17 @@
+
+SELECT
+    MATCH_ID,
+    INNINGS_NUMBER,
+    OVER_NUMBER,
+    BALL_IN_OVER,
+    BATTER_RUNS,
+    EXTRAS_RUNS,
+    TOTAL_RUNS,
+    WICKET_COUNT
+FROM {{ ref('stg_deliveries') }}
+WHERE
+       INNINGS_NUMBER NOT IN (1, 2)
+    OR BATTER_RUNS < 0
+    OR EXTRAS_RUNS < 0
+    OR TOTAL_RUNS < 0
+    OR WICKET_COUNT < 0

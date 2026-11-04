@@ -1,0 +1,15 @@
+#sources.yml → Defines your existing Snowflake source table, RAW_ORDERS.
+#schema.yml → Defines tests and documentation for your dbt models, such as stg_orders and fct_orders.
+
+version: 2
+
+sources:
+  - name: raw_data
+    database: STREAM_ALL
+    schema: STREAM_TEST
+    tables:
+      - name: RAW_ORDERS
+
+
+
+    

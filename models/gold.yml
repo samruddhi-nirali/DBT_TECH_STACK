@@ -1,0 +1,74 @@
+version: 2
+models:
+  - name: dim_player
+    columns:
+      - name: PLAYER_KEY
+        data_tests:
+        - not_null
+        - unique
+      - name: PLAYER_NAME
+        data_tests:
+        - not_null
+        - unique
+  - name: dim_team
+    columns:
+      - name: TEAM_KEY
+        data_tests:
+        - not_null
+        - unique
+      - name: TEAM_NAME
+        data_tests:
+        - not_null
+        - unique
+  - name: dim_match
+    columns:
+      - name: MATCH_KEY
+        data_tests:
+        - not_null
+        - unique
+      - name: MATCH_ID
+        data_tests:
+        - not_null
+        - unique
+  - name : fact_match_innings
+    columns:
+      - name: MATCH_KEY
+        data_tests:
+        - not_null
+        - relationships:
+            arguments: 
+              to: ref('dim_match')
+              field: MATCH_KEY
+      - name : TEAM_KEY
+        data_tests:
+        - not_null
+        - relationships:
+            arguments: 
+              to: ref('dim_team')
+              field: TEAM_KEY
+  - name : fact_player_match
+    columns:
+      - name: PLAYER_KEY
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_player')
+                field: PLAYER_KEY
+      - name: TEAM_KEY
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_team')
+                field: TEAM_KEY
+      - name: MATCH_KEY
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_match')
+                field: MATCH_KEY
+ 
+  
+        
